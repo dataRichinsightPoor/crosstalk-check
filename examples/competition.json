@@ -1,0 +1,12 @@
+{
+  "description": "Two generic branches compete for a single finite adaptor/transducer pool. This is not a literal shared Gq/Gi pool.",
+  "parameters": {
+    "cooperation": 0, "shared_pool": true, "direct_a": 0.12,
+    "direct_b": 0.8, "gate_mode": "none"
+  },
+  "protocol": {
+    "a": {"segments": [{"start": 10, "end": 20, "level": 1}]},
+    "b": {"segments": [{"start": 2, "end": 26, "level": 1}]}
+  },
+  "simulation": {"duration": 40, "dt": 0.05}
+}

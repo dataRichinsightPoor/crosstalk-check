@@ -1,0 +1,9 @@
+{
+  "description": "A builds a permissive state. Compare ordering using the Python API; this file supplies A then B.",
+  "parameters": {"memory_on": 0.6, "memory_tau": 8, "memory_gain": 4},
+  "protocol": {
+    "a": {"segments": [{"start": 2, "end": 10, "level": 1}]},
+    "b": {"segments": [{"start": 8, "end": 16, "level": 1}]}
+  },
+  "simulation": {"duration": 40, "dt": 0.05}
+}

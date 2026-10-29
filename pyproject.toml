@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crosstalk-check"
+version = "0.1.0"
+description = "Crosstalk Check: Data-Rich, Insight-Poor CCLXVII / 99 Small Problems 08, a research-use receptor stimulation workbench."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Ermelinda Damko"}]
+dependencies = ["numpy>=2.0,<3", "scipy>=1.14,<2", "matplotlib>=3.9,<4"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+crosstalk = "crosstalk.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

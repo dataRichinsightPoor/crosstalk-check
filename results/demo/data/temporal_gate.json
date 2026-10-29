@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "receptor_a_on": 1.2,
+    "receptor_a_off": 0.6,
+    "receptor_b_on": 1.0,
+    "receptor_b_off": 0.5,
+    "branch_a_on": 2.0,
+    "branch_a_off": 0.9,
+    "branch_b_on": 1.5,
+    "branch_b_off": 0.7,
+    "direct_a": 0.12,
+    "direct_b": 0.12,
+    "cooperation": 3.0,
+    "transactivation": 0.0,
+    "shared_pool": false,
+    "pool_a_basal": 0.0,
+    "transactivation_via_memory": false,
+    "gate_mode": "edge",
+    "gate_leak": 0.02,
+    "switch_tau_open": 0.3,
+    "switch_tau_close": 0.3,
+    "effector_basal": 0.0,
+    "effector_off": 0.7,
+    "feedback_gain": 0.8,
+    "feedback_tau": 4.0,
+    "memory_on": 0.0,
+    "memory_tau": 8.0,
+    "memory_gain": 0.0,
+    "priming_gain": 0.0,
+    "memory_inhibition": 0.0,
+    "live_inhibition": 0.0,
+    "sensor_total": 0.0,
+    "sensor_on": 3.0,
+    "sensor_off": 1.0,
+    "sensor_bound_deactivation": 0.7,
+    "reporter_tau": 0.7,
+    "recorder_on": 0.08
+  },
+  "protocol": {
+    "a": {
+      "baseline": 0.0,
+      "segments": [
+        {
+          "start": 2,
+          "end": 26,
+          "level": 1
+        }
+      ]
+    },
+    "b": {
+      "baseline": 0.0,
+      "segments": [
+        {
+          "start": 2,
+          "end": 26,
+          "level": 1
+        }
+      ]
+    },
+    "switch": {
+      "baseline": 1,
+      "segments": [
+        {
+          "start": 10,
+          "end": 20,
+          "level": 0
+        }
+      ]
+    }
+  },
+  "duration_min": 40.0,
+  "solver": {
+    "method": "DOP853",
+    "rtol": 1e-08,
+    "atol": 1e-10,
+    "max_step": 0.25,
+    "output_dt": 0.05,
+    "rhs_evaluations": 2692,
+    "input_segments": 5
+  },
+  "summary": {
+    "effector_free_auc": 11.447497527524447,
+    "effector_free_peak": 0.5825433334998609,
+    "effector_free_final": 0.0028525572948997855,
+    "reporter_auc": 11.444434766263765,
+    "reporter_peak": 0.5749699903062048,
+    "reporter_final": 0.004375229983399452,
+    "recorder_auc": 14.9440638344201,
+    "recorder_peak": 0.5998035906810357,
+    "recorder_final": 0.5998035906810357,
+    "branch_a_auc": 15.812710594718451,
+    "branch_a_peak": 0.5970149253731343,
+    "branch_a_final": 0.0009607720677272662,
+    "branch_b_auc": 15.865838426724775,
+    "branch_b_peak": 0.5882352941176466,
+    "branch_b_final": 0.004027043144313543
+  },
+  "warning": "Synthetic illustrative forward simulation; not fitted or biologically validated."
+}

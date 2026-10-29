@@ -1,0 +1,10 @@
+{
+  "description": "Illustrative cooperation at a shared effector; close the selective connection from minute 10 to 20.",
+  "parameters": {"cooperation": 3.0, "gate_mode": "edge", "gate_leak": 0.02},
+  "protocol": {
+    "a": {"segments": [{"start": 2, "end": 26, "level": 1}]},
+    "b": {"segments": [{"start": 2, "end": 26, "level": 1}]},
+    "switch": {"baseline": 1, "segments": [{"start": 10, "end": 20, "level": 0}]}
+  },
+  "simulation": {"duration": 40, "dt": 0.05}
+}

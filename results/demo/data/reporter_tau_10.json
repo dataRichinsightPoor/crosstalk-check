@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "receptor_a_on": 1.2,
+    "receptor_a_off": 0.6,
+    "receptor_b_on": 1.0,
+    "receptor_b_off": 0.5,
+    "branch_a_on": 2.0,
+    "branch_a_off": 0.9,
+    "branch_b_on": 1.5,
+    "branch_b_off": 0.7,
+    "direct_a": 0.12,
+    "direct_b": 0.12,
+    "cooperation": 3.0,
+    "transactivation": 0.0,
+    "shared_pool": false,
+    "pool_a_basal": 0.0,
+    "transactivation_via_memory": false,
+    "gate_mode": "edge",
+    "gate_leak": 0.02,
+    "switch_tau_open": 0.3,
+    "switch_tau_close": 0.3,
+    "effector_basal": 0.0,
+    "effector_off": 0.7,
+    "feedback_gain": 0.8,
+    "feedback_tau": 4.0,
+    "memory_on": 0.0,
+    "memory_tau": 8.0,
+    "memory_gain": 0.0,
+    "priming_gain": 0.0,
+    "memory_inhibition": 0.0,
+    "live_inhibition": 0.0,
+    "sensor_total": 0.0,
+    "sensor_on": 3.0,
+    "sensor_off": 1.0,
+    "sensor_bound_deactivation": 0.7,
+    "reporter_tau": 10,
+    "recorder_on": 0.08
+  },
+  "protocol": {
+    "a": {
+      "baseline": 0.0,
+      "segments": [
+        {
+          "start": 2,
+          "end": 12,
+          "level": 1
+        }
+      ]
+    },
+    "b": {
+      "baseline": 0.0,
+      "segments": [
+        {
+          "start": 2,
+          "end": 12,
+          "level": 1
+        }
+      ]
+    },
+    "switch": {
+      "baseline": 1,
+      "segments": []
+    }
+  },
+  "duration_min": 40.0,
+  "solver": {
+    "method": "DOP853",
+    "rtol": 1e-08,
+    "atol": 1e-10,
+    "max_step": 0.25,
+    "output_dt": 0.05,
+    "rhs_evaluations": 2571,
+    "input_segments": 3
+  },
+  "summary": {
+    "effector_free_auc": 7.270766817055687,
+    "effector_free_peak": 0.5825433334985327,
+    "effector_free_final": 2.636354048330646e-06,
+    "reporter_auc": 6.863665165460019,
+    "reporter_peak": 0.363352285857578,
+    "reporter_final": 0.040710080255875004,
+    "recorder_auc": 13.440934518005182,
+    "recorder_peak": 0.44103104569607127,
+    "recorder_final": 0.44103104569607127,
+    "branch_a_auc": 7.456123851719439,
+    "branch_a_peak": 0.5970149064170021,
+    "branch_a_final": 2.2460118246682597e-07,
+    "branch_b_auc": 7.638888988262661,
+    "branch_b_peak": 0.5882346918029153,
+    "branch_b_final": 4.127419047531418e-06
+  },
+  "warning": "Synthetic illustrative forward simulation; not fitted or biologically validated."
+}

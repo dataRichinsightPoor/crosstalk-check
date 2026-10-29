@@ -1,0 +1,74 @@
+{
+  "description": "Data-Rich, Insight-Poor · No. CCLXVII / 99 Small Problems · Installment 08. Crosstalk Check: TrkB + mGluR5. Synthetic illustrative model, not fitted. https://www.cell.com/cell-reports/fulltext/S2211-1247(23)01607-8",
+  "parameters": {
+    "receptor_a_on": 1.2,
+    "receptor_a_off": 0.6,
+    "receptor_b_on": 1,
+    "receptor_b_off": 0.5,
+    "branch_a_on": 2,
+    "branch_a_off": 0.9,
+    "branch_b_on": 1.5,
+    "branch_b_off": 0.7,
+    "direct_a": 0.12,
+    "direct_b": 0.12,
+    "cooperation": 3,
+    "transactivation": 0,
+    "shared_pool": false,
+    "pool_a_basal": 0,
+    "transactivation_via_memory": false,
+    "gate_mode": "edge",
+    "gate_leak": 0.02,
+    "switch_tau_open": 0.3,
+    "switch_tau_close": 0.3,
+    "effector_basal": 0,
+    "effector_off": 0.7,
+    "feedback_gain": 0.8,
+    "feedback_tau": 4,
+    "memory_on": 0,
+    "memory_tau": 8,
+    "memory_gain": 0,
+    "priming_gain": 0,
+    "memory_inhibition": 0,
+    "live_inhibition": 0,
+    "sensor_total": 0,
+    "sensor_on": 3,
+    "sensor_off": 1,
+    "sensor_bound_deactivation": 0.7,
+    "reporter_tau": 0.7,
+    "recorder_on": 0.08
+  },
+  "protocol": {
+    "a": {
+      "segments": [
+        {
+          "start": 2,
+          "end": 26,
+          "level": 1
+        }
+      ]
+    },
+    "b": {
+      "segments": [
+        {
+          "start": 2,
+          "end": 26,
+          "level": 1
+        }
+      ]
+    },
+    "switch": {
+      "baseline": 1,
+      "segments": [
+        {
+          "start": 10,
+          "end": 20,
+          "level": 0
+        }
+      ]
+    }
+  },
+  "simulation": {
+    "duration": 40,
+    "dt": 0.1
+  }
+}

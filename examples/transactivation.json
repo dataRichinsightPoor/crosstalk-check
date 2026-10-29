@@ -1,0 +1,12 @@
+{
+  "description": "A indirectly activates B without B ligand. Gate only the A-to-B connection.",
+  "parameters": {
+    "cooperation": 0, "transactivation": 1.5,
+    "direct_a": 0.02, "direct_b": 0.8, "gate_mode": "edge", "gate_leak": 0
+  },
+  "protocol": {
+    "a": {"segments": [{"start": 2, "end": 26, "level": 1}]},
+    "switch": {"baseline": 1, "segments": [{"start": 10, "end": 20, "level": 0}]}
+  },
+  "simulation": {"duration": 40, "dt": 0.05}
+}

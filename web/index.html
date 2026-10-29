@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Crosstalk Check: Data-Rich, Insight-Poor · No. CCLXVII. 99 Small Problems · Installment 08. A research-use receptor stimulation workbench.">
+  <title>Crosstalk Check | CCLXVII · 99 Small Problems 08</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to simulation</a>
+  <header class="topbar">
+    <div class="publication">DATA-RICH, INSIGHT-POOR <span>No. CCLXVII · 99 Small Problems · 08</span></div>
+    <div class="tool-name">Crosstalk Check <span class="version">v0.1</span></div>
+    <a class="quiet-link" href="https://github.com/dataRichinsightPoor/crosstalk-check" target="_blank" rel="noopener">Code &amp; methods ↗</a>
+  </header>
+  <div class="app-shell">
+    <aside class="library" aria-label="Receptor system library">
+      <div class="section-label">SYSTEM LIBRARY <span id="case-count">18</span></div>
+      <p class="library-intro">Choose a biological question, not just a pathway name.</p>
+      <label class="sr-only" for="search">Search receptor systems</label>
+      <input id="search" type="search" placeholder="Find a receptor or mechanism">
+      <label class="sr-only" for="family">Filter receptor family</label>
+      <select id="family"><option value="all">All receptor families</option></select>
+      <div id="case-list" class="case-list" role="list"></div>
+      <div class="library-note">
+        <b>Evidence is not calibration.</b>
+        <p>Published mechanisms inform the examples. Every numerical parameter is illustrative.</p>
+      </div>
+    </aside>
+    <main id="workspace">
+      <div class="title-row"><div><div id="case-family" class="section-label"></div><h1 id="case-title">Crosstalk Check</h1></div><button id="reset" class="button secondary">Reset case</button></div>
+      <p id="case-question" class="question">Choose a receptor system to begin.</p>
+      <div class="evidence-banner"><span class="status-dot"></span><span id="model-status">Synthetic parameters · literature-informed topology · not a fitted receptor model</span></div>
+      <nav class="tabs" aria-label="Workspace views" role="tablist">
+        <button role="tab" id="tab-lab" aria-controls="view-lab" aria-selected="true" data-tab="lab">Stimulation lab</button>
+        <button role="tab" id="tab-evidence" aria-controls="view-evidence" aria-selected="false" data-tab="evidence">Evidence &amp; limits</button>
+        <button role="tab" id="tab-assay" aria-controls="view-assay" aria-selected="false" data-tab="assay">Assay design</button>
+        <button role="tab" id="tab-sweep" aria-controls="view-sweep" aria-selected="false" data-tab="sweep">Gate sensitivity</button>
+        <button role="tab" id="tab-methods" aria-controls="view-methods" aria-selected="false" data-tab="methods">Model &amp; export</button>
+      </nav>
+      <div id="error" role="alert" hidden></div>
+      <div id="view-lab" class="view" role="tabpanel" aria-labelledby="tab-lab">
+        <div class="lab-grid">
+          <section class="results" aria-label="Simulation results">
+            <div class="routing">
+              <div class="input-pair"><span><i class="dot a"></i><b>A</b> <span id="input-a-label"></span></span><span><i class="dot b"></i><b>B</b> <span id="input-b-label"></span></span></div>
+              <span class="route-arrow" aria-hidden="true">→</span><div class="junction"><span id="mechanism-label"></span><small id="gate-label">Connection gate</small></div>
+              <span class="route-arrow" aria-hidden="true">→</span><div class="output-node">Shared output<small>+ measurement layer</small></div>
+            </div>
+            <div class="chart-head"><div><h2>What reaches the output?</h2><p>Reference and intervention use identical stimulation.</p></div><label class="readout-label">Readout<select id="readout"><option value="effector_free">Free active effector</option><option value="reporter">Reversible reporter</option><option value="recorder">Irreversible recorder</option><option value="branch_b">Branch B / pool allocation</option><option value="receptor_b">Receptor B activation</option><option value="sensor_bound">Sensor-bound effector</option></select></label></div>
+            <div id="main-legend" class="legend"></div>
+            <div id="main-chart" class="chart"></div>
+            <p class="chart-caption">Normalized model response; not calcium, cAMP, phosphoprotein concentration, or a predicted biological effect size.</p>
+            <div id="metrics" class="metric-strip" aria-live="polite"></div>
+            <div class="chart-head"><div><h2>Interaction, not just inhibition</h2><p>I(t) = AB − A − B + baseline, on the selected readout scale.</p></div></div>
+            <div id="interaction-legend" class="legend"></div>
+            <div id="interaction-chart" class="chart short"></div>
+            <p class="chart-caption">Nonlinearity and saturation can create a nonzero interaction even without a mechanistic connection. This contrast is not proof of synergy.</p>
+            <details class="panel-detail"><summary>Inspect proximal states and stimulation timing</summary>
+              <div id="proximal-legend" class="legend"></div><div id="proximal-chart" class="chart short"></div>
+              <div id="timing-legend" class="legend"></div><div id="timing-chart" class="chart short"></div>
+              <p class="chart-caption">In shared-pool mode, branch A/B denote allocations. Their sum cannot exceed one.</p>
+            </details>
+            <details class="panel-detail"><summary>Eight-condition comparison table</summary><div class="table-scroll"><table id="result-table"></table></div></details>
+            <div class="export-row"><button id="csv" class="button secondary">Download CSV</button><button id="svg" class="button secondary">Download chart</button><span id="run-status" role="status">Ready</span></div>
+          </section>
+          <aside class="controls" aria-label="Stimulation controls">
+            <div class="controls-heading"><h2>Design the perturbation</h2><span class="small-text">Changes rerun the model</span></div>
+            <div id="import-notice" class="import-notice" hidden><p>Imported timing is active. The protocol below is preserved exactly; timing fields are locked.</p><pre id="imported-timing"></pre><button id="edit-imported" class="button secondary">Replace with visible timing</button></div>
+            <fieldset><legend>Stimulation</legend>
+              <label>Input sequence<select id="sequence"><option>Simultaneous</option><option>A then B</option><option>B then A</option><option>Pulsed A</option><option>Custom timing</option></select></label>
+              <div class="input-columns"><label>A level<input id="a-level" type="number" min="0" max="1" step="0.1" value="1"></label><label>B level<input id="b-level" type="number" min="0" max="1" step="0.1" value="1"></label></div>
+              <div class="input-columns"><label>A start<input id="a-start" type="number" min="0" max="80" step="1" value="2"></label><label>A end<input id="a-end" type="number" min="0" max="80" step="1" value="26"></label></div>
+              <div class="input-columns"><label>B start<input id="b-start" type="number" min="0" max="80" step="1" value="2"></label><label>B end<input id="b-end" type="number" min="0" max="80" step="1" value="26"></label></div>
+              <p class="control-note">Levels 0–1; timing in illustrative model minutes.</p>
+            </fieldset>
+            <fieldset><legend>Conformational gate</legend>
+              <label>Intervention target<select id="gate-mode"><option value="edge">Cooperative / relay connection</option><option value="allocation">A branch / pool allocation</option><option value="hub">Whole downstream effector</option><option value="none">No functional gate</option></select></label>
+              <label>Switch command<select id="switch-command"><option value="window">Close from 10 to 20</option><option value="open">Always open</option><option value="closed">Always closed</option><option value="open-window">Open from 10 to 20</option><option value="pulses">Repeated 4-minute openings</option></select></label>
+              <label class="slider-label">Residual leak <output id="leak-value"></output><input id="leak" type="range" min="0" max="0.6" step="0.01"></label>
+              <label class="slider-label">Opening time constant <output id="opening-value"></output><input id="opening" type="range" min="0.05" max="8" step="0.05"></label>
+              <label class="slider-label">Closing time constant <output id="closing-value"></output><input id="closing" type="range" min="0.05" max="8" step="0.05"></label>
+            </fieldset>
+            <fieldset><legend>Readout can change the answer</legend>
+              <label class="slider-label">Reporter lag <output id="lag-value"></output><input id="lag" type="range" min="0.05" max="12" step="0.05"></label>
+              <label class="slider-label">Sensor loading <output id="sensor-value"></output><input id="sensor" type="range" min="0" max="3" step="0.1"></label>
+              <p class="control-note">Binding sensor sequesters active effector. It is not a passive overlay.</p>
+            </fieldset>
+            <details class="advanced"><summary>Mechanistic parameters</summary>
+              <label class="slider-label">Cooperation gain <output id="cooperation-value"></output><input id="cooperation" type="range" min="0" max="8" step="0.1"></label>
+              <label class="slider-label">A → B relay <output id="relay-value"></output><input id="relay" type="range" min="0" max="4" step="0.1"></label>
+              <label class="slider-label">Negative feedback <output id="feedback-value"></output><input id="feedback" type="range" min="0" max="8" step="0.1"></label>
+              <label class="slider-label">Memory formation rate <output id="memory-on-value"></output><input id="memory-on" type="range" min="0" max="2" step="0.05"></label>
+              <label class="slider-label">Memory decay time <output id="memory-tau-value"></output><input id="memory-tau" type="range" min="0.2" max="25" step="0.2"></label>
+              <label class="slider-label">Memory-dependent priming <output id="priming-value"></output><input id="priming" type="range" min="0" max="8" step="0.1"></label>
+              <label class="slider-label">Memory-dependent inhibition <output id="inhibition-value"></output><input id="inhibition" type="range" min="0" max="10" step="0.1"></label>
+              <label class="check-label"><input type="checkbox" id="shared-pool"> Finite shared branch pool</label>
+              <label class="slider-label">Basal A allocation rate <output id="pool-basal-value"></output><input id="pool-basal" type="range" min="0" max="2" step="0.05"></label>
+              <p class="control-note">Memory effects require nonzero memory formation; inspect all parameters before interpretation.</p>
+              <button id="null-model" class="button secondary">Remove explicit connections</button>
+              <p class="control-note">Keeps the finite output and shared feedback. A nonzero interaction can remain.</p>
+            </details>
+          </aside>
+        </div>
+      </div>
+      <section id="view-evidence" class="view prose" role="tabpanel" aria-labelledby="tab-evidence" hidden></section>
+      <section id="view-assay" class="view" role="tabpanel" aria-labelledby="tab-assay" hidden>
+        <div class="chart-head"><div><h2>Turn the mechanism into a discriminating experiment</h2><p>A draft design aid, not a validated laboratory protocol.</p></div><button id="assay-brief" class="button primary">Export assay brief</button></div>
+        <div id="assay-guidance" class="prose"></div>
+        <h3 class="sweep-title">A randomized 96-well draft</h3>
+        <p class="chart-caption">Eight matched factorial conditions, plus optional unsimulated technical controls. These are technical replicates; they do not establish biological replication.</p>
+        <div class="plate-controls">
+          <label>Technical replicates<input id="plate-replicates" type="number" min="1" max="8" step="1" value="3"></label>
+          <label>Randomization seed<input id="plate-seed" type="number" min="0" max="4294967295" step="1" value="26708"></label>
+          <label class="check-label"><input id="plate-edges" type="checkbox" checked> Reserve perimeter wells</label>
+          <label class="check-label"><input id="plate-controls" type="checkbox" checked> Include four technical controls</label>
+          <button id="make-plate" class="button secondary">Generate plate</button>
+        </div>
+        <div id="plate-error" role="alert" hidden></div>
+        <div id="plate-result"></div>
+        <p class="chart-caption">Randomization is seeded but not optimized for blocking, dispensing order, edge effects, or multiple assay plates. Specify cell context, actual ligand doses, switch expression, detector settings, and sampling times before use.</p>
+      </section>
+      <section id="view-sweep" class="view" role="tabpanel" aria-labelledby="tab-sweep" hidden>
+        <div class="chart-head"><div><h2>How much does switch performance matter?</h2><p>Hold the biology fixed. Vary leakage and closing time.</p></div><button id="run-sweep" class="button primary">Run 25-condition sweep</button></div>
+        <div class="evidence-banner">Fixed comparison: both inputs on at 2–24 min; switch closes at 10–20 min. This sweep uses the current parameters, but not your custom timing.</div>
+        <div id="sweep-result"><p class="empty-state">Run the sweep to see the conditional reduction in free-effector AUC during the closed window.</p></div>
+        <p class="chart-caption">Sensitivity analysis, not a confidence interval or estimated experimental success rate. Negative reduction means the gated response increased.</p>
+      </section>
+      <section id="view-methods" class="view prose" role="tabpanel" aria-labelledby="tab-methods" hidden>
+        <h2>A forward model, not a receptor predictor</h2>
+        <p>Two receptor states feed two branch states and a finite active-effector pool. A conformational gate can control one connection, A's allocation, or the full effector drive. Feedback, a history-dependent state, reversible reporting, irreversible recording, and sensor sequestration are explicit.</p>
+        <div class="equation">I(t) = Y<sub>AB</sub> − Y<sub>A</sub> − Y<sub>B</sub> + Y<sub>0</sub><br>ΔI = I<sub>reference</sub> − I<sub>intervention</sub></div>
+        <p>Interaction depends on the measurement scale. A saturated output can yield a negative interaction contrast without receptor inhibition. Matching a plot does not identify a molecular mechanism.</p>
+        <h3>Conformational switching is abstracted</h3><p>The open fraction relaxes toward the commanded state with separate opening and closing time constants. Residual leak determines the minimum available activity. The model does not design a protein sequence or infer an energy landscape from structure.</p>
+        <h3>Numerical implementation</h3><p>The browser uses bounded-step RK4, split at every input discontinuity. The repository includes an independent SciPy DOP853 implementation and cross-engine fixtures for all 18 examples. Numerical agreement verifies implementation, not biological validity.</p>
+        <h3>Reproduce or change this experiment</h3><p>Export a JSON configuration and run it with <code>crosstalk run --config experiment.json</code>. CSV includes all states and eight matched conditions. All calculations run locally in this page; no simulation inputs are sent to a server.</p>
+        <div class="export-row"><button id="export-config" class="button primary">Export configuration</button><label class="button secondary file-label" for="import-config">Load configuration<input type="file" id="import-config" accept=".json,application/json"></label></div>
+        <p id="import-status" role="status"></p>
+        <details class="panel-detail"><summary>Inspect every parameter</summary><pre id="parameter-json"></pre></details>
+        <p><a href="https://github.com/dataRichinsightPoor/crosstalk-check/blob/main/docs/MODEL.md" target="_blank" rel="noopener">Complete equations, invariants, and limitations ↗</a></p>
+      </section>
+      <footer><span>Data-Rich, Insight-Poor · No. CCLXVII<br>99 Small Problems · Installment 08</span><span>MIT-licensed research prototype · Not clinically validated<br>Evidence reviewed October 29, 2026</span></footer>
+    </main>
+  </div>
+  <noscript>This simulation requires JavaScript. The Python implementation and full methods are available in the GitHub repository.</noscript>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
