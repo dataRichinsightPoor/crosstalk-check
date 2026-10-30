@@ -29,6 +29,8 @@ The browser marks each example as a receptor pair, an engineered comparator, or 
 
 ## Open the tool
 
+Use the [public interactive workbench](https://datarichinsightpoor.github.io/crosstalk-check/) without installing anything. Read the companion article, [Interrupt the Connection, Not the Cell](docs/ARTICLE.md), and the [development guide for all eighteen projects](docs/PROJECT_GUIDE.md) for evidence-ranked switch proposals and experimental stopping criteria.
+
 The browser application is static and requires no build, login, server-side API, or credentials. From the repository root:
 
 ```bash

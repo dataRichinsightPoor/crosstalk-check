@@ -81,7 +81,7 @@
     "id": "tcr-lfa1", "title": "TCR + LFA-1", "family": "Immune × adhesion", "kind": "Receptor pair", "mechanism": "Cooperation analogue",
     "a": "TCR stimulation", "b": "LFA-1 costimulation",
     "question": "What would a shared output hide about spatial signal integration?",
-    "evidence": "Ras-LOCKR distinguished Golgi Ras activity after TCR stimulation from plasma-membrane activity with TCR/LFA-1 costimulation.",
+    "evidence": "Ras-LOCKR distinguished Golgi Ras activity under CD3/CD28 stimulation from plasma-membrane activity under CD3/ICAM-1 conditions in Jurkat cells; costimulation context was not otherwise identical.",
     "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11631767/",
     "sourceLabel": "Zhang et al. · Nature Biotechnology, 2024",
     "mapping": "A lumped cooperation analogue highlights why a proximal or compartment-specific measurement is needed.",

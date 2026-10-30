@@ -75,7 +75,7 @@ These are useful for bypass experiments: if a receptor-dependent interaction dis
 
 ### A de novo sensor at a genuine convergence point
 
-Ras-LOCKR is especially relevant because target recognition opens a designed conformational switch, enabling a FRET readout of endogenous Ras activity; compartment-targeted variants resolved different Ras responses at the plasma membrane, Golgi, and signaling assemblies ([Zhang et al., Nature Biotechnology, 2024](https://pmc.ncbi.nlm.nih.gov/articles/PMC11631767/)). In Jurkat cells, the study distinguished Golgi-associated Ras activity following TCR stimulation from plasma-membrane activity detected with TCR/LFA-1 costimulation ([Zhang et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC11631767/)).
+Ras-LOCKR is especially relevant because target recognition opens a designed conformational switch, enabling a FRET readout of endogenous Ras activity; compartment-targeted variants resolved different Ras responses at the plasma membrane, Golgi, and signaling assemblies ([Zhang et al., Nature Biotechnology, 2024](https://pmc.ncbi.nlm.nih.gov/articles/PMC11631767/)). In Jurkat cells, the study distinguished Golgi-associated Ras activity under CD3/CD28 stimulation from plasma-membrane activity under CD3/ICAM-1 conditions; the costimulation context therefore differed, rather than isolating LFA-1 as the only changed variable ([Zhang et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC11631767/)).
 
 That finding makes compartment-specific Ras sensing a strong starting point for receptor cooperation assays. I would use Ras-LOCKR as a reader before attempting to repurpose it as a feedback actuator.
 

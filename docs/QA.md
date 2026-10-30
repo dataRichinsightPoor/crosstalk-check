@@ -35,3 +35,9 @@ Configuration export/import retained the same model result and locked imported t
 The default plate assigned 36 unique wells with three technical replicates per condition while reserving the perimeter. The capacity check rejected an overfilled interior-only design; unassigned and technical-control wells remained explicitly identified.
 
 Desktop and 375-pixel mobile views were inspected, including resize-back behavior and horizontal-overflow checks. No uncaught browser exceptions were observed in these verification flows.
+
+## Public deployment verification
+
+The public GitHub Pages site loaded and completed its eight-condition numerical checks. Its plate planner generated the expected 36 assigned wells with seed 26708 and three technical replicates; no uncaught browser errors were collected during this flow.
+
+The initial public [numerical verification workflow](https://github.com/dataRichinsightPoor/crosstalk-check/actions/runs/40976526705) and [Pages deployment workflow](https://github.com/dataRichinsightPoor/crosstalk-check/actions/runs/40976526948) both completed successfully. The local full suite comprises 52 Python tests, 23 JavaScript numerical/plate tests, and six browser UI tests.
