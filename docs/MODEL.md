@@ -97,7 +97,7 @@ Memory is produced only by the A contribution. It can increase the cooperative t
 D=
 \frac{
 d_0+w_AX+
-\dfrac{w_BZ(1+P g_Em)}{1+T g_Em+L g_EX}
+\dfrac{w_BZ(1+P g_Em)}{1+T g_Em+L g_EX}+
 C g_EXZ(1+M m)
 }{
 1+F f
